@@ -43,7 +43,7 @@
 @import "assets/scss/components/badge";
 @import "assets/scss/components/image";
 @import "assets/scss/components/flex";
-// @import "assets/scss/layouts/sidebar";
+@import "assets/scss/layouts/sidebar";
 
 /**For views*/
 
@@ -55,3 +55,6 @@
 
 /*for checkbox and radio*/
 
+body{
+  font-family: "Source Sans Pro", sans-serif !important;
+}

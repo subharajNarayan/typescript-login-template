@@ -19,6 +19,10 @@ import Notifications from './notifications.svg'
 import PrintIcon from './Print.svg'
 import QuestionIcon from './Question.svg'
 import ViewIcon from './View.svg'
+import Dashboard from './Dashboard.svg'
+import Form from './Form.svg'
+import List from './List.svg'
+import AboutIcon from './About.svg'
 
 export {
     HomeIcon,
@@ -41,5 +45,9 @@ export {
     Notifications,
     PrintIcon,
     QuestionIcon,
-    ViewIcon
+    ViewIcon,
+    Dashboard,
+    Form,
+    List,
+    AboutIcon,
 }

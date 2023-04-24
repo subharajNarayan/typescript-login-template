@@ -7,7 +7,7 @@
                 background-color: $cool-gray-200;
                 .sidebar,
                 header {
-                    background-color: $value;
+                    // background-color: $value;
                 }
                 .sidebar {
                     .list {
@@ -15,7 +15,7 @@
                             a {
                                 color: lighten($value, 50);
                                 &.active {
-                                    background-color: lighten($value, 50);
+                                    // background-color: lighten($value, 50);
                                     color: $value;
                                 }
                                 &:not(.active):hover,

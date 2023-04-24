@@ -5,7 +5,7 @@ import { Nav, NavItem, NavLink } from 'reactstrap';
 const AppFooter = () => {
   return (
     <CFooter>
-        <Nav className='w-100 justify-content-center'>
+        <Nav className='w-100 justify-content-center align-items-baseline'>
           {/* <NavItem>
             <NavLink href='#' target='_blank' rel="noopener noreferrer">
               React Template
@@ -17,8 +17,8 @@ const AppFooter = () => {
             <NavLink href='#' target='_blank' rel="noopener noreferrer">
               SmartTech Solution Pvt.Ltd.
             </NavLink>
-            <span className="me-1">All Right Reserved </span>
           </NavItem>
+            <span className="mx-2">All Right Reserved </span>
         </Nav>
       {/* <div>
         <a href="#" target="_blank" rel="noopener noreferrer">

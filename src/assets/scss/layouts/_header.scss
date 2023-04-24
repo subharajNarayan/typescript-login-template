@@ -7,12 +7,20 @@ $header-bg: #FFFFFF;
         padding: 1rem;
     }
     .toggler {
-        margin-right: 1rem;
+        margin-left: 1rem;
         cursor: pointer;
+        img{
+            filter: grayscale(100%);
+            opacity: 0.8;
+            &:hover{
+                filter: grayscale(0);
+                opacity: 1;
+            }
+        }
     }
     .auth {
         display: flex;
-        align-items: center;
+        align-items: baseline;
         @include media-breakpoint-down(md) {
             padding-right: 0;
         }
@@ -22,7 +30,7 @@ $header-bg: #FFFFFF;
             // @include des;
             font-weight: 400;
             @include media-breakpoint-down(sm) {
-                display: none;
+                display: block;
             }
         }
         i,
