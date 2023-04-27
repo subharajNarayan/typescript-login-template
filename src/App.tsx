@@ -50,7 +50,7 @@ function App() {
   }
 
   
-  console.log(location, location.pathname, "testtt")
+  // console.log(location, location.pathname, "testtt")
 
   //fetch token from localstorage and set details on reducer
   useEffect(() => {
@@ -68,7 +68,7 @@ function App() {
       {isAuthenticated() ? (
         <PrivateRoute
           appRoutes={appRoutes.filter((route) => route.type !== "login")}
-          redirectPath={[{ from: "*", to: "/home" }]}
+          redirectPath={[{ from: "*", to: "/auth/home" }]}
         />
       )
       :

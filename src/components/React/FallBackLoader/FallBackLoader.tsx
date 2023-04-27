@@ -1,6 +1,6 @@
 // import Loader from "../../UI/Loader/index";
 import React from "react";
-import logo from "../../../assets/images/AMS-LOGO-ORIGINAL.png";
+import logo from "../../../assets/images/fav.png";
 
 
 interface FallbackProps {

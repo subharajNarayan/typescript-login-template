@@ -23,36 +23,36 @@ const AppSidebar = (props: Props) => {
 
   const SidebarItem = [
     {
-      name: "Dashboard",
-      title: "Dashboard",
+      name: "Home",
+      title: "Home",
+      link: "/auth/home",
+      icon: HomeIcon,
+    },
+    {
+      name: "About",
+      title: "About us",
+      link: "/auth/about",
+      icon: AboutIcon
+    },
+    {
+      name: "Components",
+      title: "Components",
       link: "",
       icon: Dashboard,
       children: [
         {
           name: "Form",
           title: 'Form',
-          link: "/form",
+          link: "/auth/form",
           icon: Form,
         },
         {
           name: "List",
           title: 'List',
-          link: "/List",
+          link: "/auth/List",
           icon: List,
         },
       ]
-    },
-    {
-      name: "Home",
-      title: "Home",
-      link: "/home",
-      icon: HomeIcon,
-    },
-    {
-      name: "About",
-      title: "About us",
-      link: "/about",
-      icon: AboutIcon
     },
   ]
 

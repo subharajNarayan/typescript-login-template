@@ -1,13 +1,32 @@
-import React, { Suspense } from 'react'
+import React, { ReactElement, Suspense } from 'react';
+import { connect, ConnectedProps, useDispatch } from "react-redux";
+import PrivateRoute from '../../../routes/PrivateRoute/PrivateRoute';
+import useAuthentication from '../../../services/authentication/AuthService';
+import { RootState } from '../../../store/root-reducer';
+
 import AppHeader from './Header/Header'
 import Sidebar from './Sidebar/sidebar'
 import AppFooter from './Footer/footer'
 import "../../../assets/dashboard/scss/style.scss"
 import FallbackLoader from '../../../components/React/FallBackLoader/FallBackLoader'
-import Home from '../pages/home/Home'
+import Home from '../../public/Home/Home'
+import { useNavigate } from 'react-router-dom';
+import Form from '../pages/form/Form';
+import List from '../pages/list/List';
 
-const Dashboard = () => {
+interface Props extends PropsFromRedux {
+  children: any;
+}
+
+function Dashboard(props: Props): ReactElement {
   const [sidebarToggle, setsidebarToggle] = React.useState(false);
+  const { children } = props;
+  const navigate = useNavigate;
+  const { isAuthenticated } = useAuthentication();
+
+  console.log({props});
+  console.log({children});
+  
 
   return (
     <Suspense fallback={<FallbackLoader />}>
@@ -19,8 +38,12 @@ const Dashboard = () => {
         <main className="stickyHeader">
           <AppHeader sidebarToggle={sidebarToggle} setsidebarToggle={setsidebarToggle} />
           <div className="body flex-grow-1 px-3">
-            {/* <AppContent /> */}
+
             <Home />
+            {/* <Form /> */}
+            {/* <List /> */}
+            {/* <PrivateRoute appRoutes={children ?[...children] : []}  
+              redirectPath={[{ to: isAuthenticated() ? "/auth/home" : "/login", from: "*" }]} /> */}
           </div>
           <AppFooter />
         </main>
@@ -28,5 +51,14 @@ const Dashboard = () => {
     </Suspense>
   )
 }
+const mapStateToProps = (state: RootState) => ({
+});
 
-export default Dashboard;
+const mapDispatchToProps = {
+};
+
+const connector = connect(mapStateToProps, mapDispatchToProps);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+export default connector(Dashboard);
