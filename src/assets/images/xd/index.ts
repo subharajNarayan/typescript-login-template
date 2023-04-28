@@ -23,6 +23,7 @@ import Dashboard from './Dashboard.svg'
 import Form from './Form.svg'
 import List from './List.svg'
 import AboutIcon from './About.svg'
+import Pagination from './Pagination.svg'
 
 export {
     HomeIcon,
@@ -50,4 +51,5 @@ export {
     Form,
     List,
     AboutIcon,
+    Pagination,
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { HomeIcon, Dashboard, Form, List, AboutIcon } from '../../../../assets/images/xd';
+import { HomeIcon, Dashboard, Form, List, AboutIcon, Pagination } from '../../../../assets/images/xd';
 import { Link, NavLink } from 'react-router-dom';
 import { UncontrolledCollapse } from 'reactstrap';
 // import { NavLink } from 'reactstrap';
@@ -49,8 +49,14 @@ const AppSidebar = (props: Props) => {
         {
           name: "List",
           title: 'List',
-          link: "/auth/List",
+          link: "/auth/list",
           icon: List,
+        },
+        {
+          name: "Pagination",
+          title: 'Pagination',
+          link: "/auth/pagination",
+          icon: Pagination,
         },
       ]
     },

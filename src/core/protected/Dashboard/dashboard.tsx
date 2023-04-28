@@ -13,6 +13,8 @@ import Home from '../../public/Home/Home'
 import { useNavigate } from 'react-router-dom';
 import Form from '../pages/form/Form';
 import List from '../pages/list/List';
+import Pagination from '../pages/pagination/Pagination';
+import appRoutes from "../../../routes/routes";
 
 interface Props extends PropsFromRedux {
   children: any;
@@ -39,9 +41,13 @@ function Dashboard(props: Props): ReactElement {
           <AppHeader sidebarToggle={sidebarToggle} setsidebarToggle={setsidebarToggle} />
           <div className="body flex-grow-1 px-3">
 
-            <Home />
+          <PrivateRoute
+          appRoutes={appRoutes.filter((route) => route.type !== "login")}
+          redirectPath={[{ from: "*", to: "/auth/home" }]}
+        />
             {/* <Form /> */}
             {/* <List /> */}
+            {/* <Pagination /> */}
             {/* <PrivateRoute appRoutes={children ?[...children] : []}  
               redirectPath={[{ to: isAuthenticated() ? "/auth/home" : "/login", from: "*" }]} /> */}
           </div>

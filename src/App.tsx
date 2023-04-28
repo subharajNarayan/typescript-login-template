@@ -9,6 +9,7 @@ import "./App.scss";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {useLocation} from "react-router-dom";
+import Dashboard from "./core/protected/Dashboard/dashboard"
 
 // import toast from "./components/Notifier/Notifier";
 // import { useDispatch, useSelector } from "react-redux";
@@ -66,10 +67,8 @@ function App() {
     <>
       <ToastContainer />
       {isAuthenticated() ? (
-        <PrivateRoute
-          appRoutes={appRoutes.filter((route) => route.type !== "login")}
-          redirectPath={[{ from: "*", to: "/auth/home" }]}
-        />
+        <Dashboard children={[]}></Dashboard>
+        
       )
       :
       SignupCheck()?(
