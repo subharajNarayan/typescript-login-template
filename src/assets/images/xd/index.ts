@@ -24,6 +24,9 @@ import Form from './Form.svg'
 import List from './List.svg'
 import AboutIcon from './About.svg'
 import Pagination from './Pagination.svg'
+import Previous from './Previous.svg'
+import Next from './Next.svg'
+import Checkbox from './Checkbox.svg';
 
 export {
     HomeIcon,
@@ -52,4 +55,7 @@ export {
     List,
     AboutIcon,
     Pagination,
+    Previous,
+    Next,
+    Checkbox
 }

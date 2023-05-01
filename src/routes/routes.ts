@@ -9,6 +9,7 @@ const About = lazy(() => import("../core/public/About/About"))
 const Form = lazy(() => import("../core/protected/pages/form/Form"))
 const List = lazy(() => import("../core/protected/pages/list/List"))
 const Pagination = lazy(() => import("../core/protected/pages/pagination/Pagination"))
+const Checkbox = lazy(() => import("../core/protected/pages/checkbox/Checkbox"))
 
 const appRoutes: CustomRoute[] = [
     {
@@ -53,16 +54,26 @@ const appRoutes: CustomRoute[] = [
         component: About,
         type: "authorized",
     },
-    // {
-    //     path: "/auth/form",
-    //     component: Form,
-    //     type: "authorized",
-    // },
-    // {
-    //     path: "/auth/list",
-    //     component: List,
-    //     type: "authorized",
-    // },
+    {
+        path: "/auth/form",
+        component: Form,
+        type: "authorized",
+    },
+    {
+        path: "/auth/list",
+        component: List,
+        type: "authorized",
+    },
+    {
+        path: "/auth/pagination",
+        component: Pagination,
+        type: "authorized",
+    },
+    {
+        path: "/auth/checkbox",
+        component: Checkbox,
+        type: "authorized",
+    },
     {
         path: "/signup",
         component: Signup,

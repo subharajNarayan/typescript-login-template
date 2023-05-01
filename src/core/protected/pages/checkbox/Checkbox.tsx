@@ -1,8 +1,6 @@
-import React, { useState } from 'react';
-import ReactPaginate from 'react-paginate';
-import './pagination.scss';
-import { Table } from 'reactstrap';
-// import { Next, Previous } from '../../../../assets/images/xd';
+import React from 'react'
+import { Table } from 'reactstrap'
+import { DeleteIcon } from '../../../../assets/images/xd';
 
 interface Data {
   id: number;
@@ -14,9 +12,7 @@ interface Data {
   message: string;
 }
 
-const Pagination = () => {
-
-  const [currentPage, setCurrentPage] = useState(0);
+const Checkbox = () => {
 
   const data: Data[] = [
     { id: 1, firstname: 'John', middlename: 'prasad', lastname: 'Wick', address: 'America', email: 'john@example.com', message: 'Lorem ipsum dolor sit amet consectetur,' },
@@ -41,72 +37,61 @@ const Pagination = () => {
     { id: 20, firstname: 'Harry', middlename: 'dev', lastname: 'Potter', address: 'Azgard', email: 'harry@example.com', message: 'Lorem ipsum dolor sit amet consectetur,' },
   ];
 
-  const itemsPerPage = 3;
-  const pageCount = Math.ceil(data.length / itemsPerPage);
+  const [dataTable, setDataTable] = React.useState<Data[]>(data);
 
-  const handlePageChange = ({ selected }: { selected: number }) => {
-    setCurrentPage(selected);
-  };
 
-  const currentItems = data.slice(
-    currentPage * itemsPerPage,
-    (currentPage + 1) * itemsPerPage
-  );
+  const DeleteData = (id: number) => {
+    const filterData = dataTable.filter((item) => item.id !== id);
+    console.log({ filterData });
+    setDataTable(filterData)
+  }
+
 
   return (
-    <section className="table-with-pagination p-4 list data-table">
-      <div className='pagination-heading'>
-        <h4>REACT PAGINATE</h4>
+    <section className='p-4'>
+      <div className='checkbox'>
+        <div className="checkbox-heading">
+          <h4>Checkbox</h4>
+        </div>
+        <div className='list data-table'>
+          <div className="table-responsive">
+            <Table>
+              <thead>
+                <tr>
+                  <th>S.N</th>
+                  <th>First Name</th>
+                  <th>Middle Name</th>
+                  <th>Last Name</th>
+                  <th>Address</th>
+                  <th>Email</th>
+                  <th>Message</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {data?.map((item, index) => (
+                  <tr key={index}>
+                    <td>{item.id}</td>
+                    <td>{item.firstname}</td>
+                    <td>{item.middlename}</td>
+                    <td>{item.lastname}</td>
+                    <td>{item.address}</td>
+                    <td>{item.email}</td>
+                    <td>{item.message}</td>
+                    <td className="action">
+                      <div role='button' onClick={() => DeleteData(item.id)}>
+                        <img src={DeleteIcon} alt="" />
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </Table>
+          </div>
+        </div>
       </div>
-      <div className='table-responsive'>
-        <Table className='table'>
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>First Name</th>
-              <th>Middle Name</th>
-              <th>Last Name</th>
-              <th>Address</th>
-              <th>Email</th>
-              <th>Message</th>
-            </tr>
-          </thead>
-          <tbody>
-            {currentItems.map((item) => (
-              <tr key={item.id}>
-                <td>{item.id}</td>
-                <td>{item.firstname}</td>
-                <td>{item.middlename}</td>
-                <td>{item.lastname}</td>
-                <td>{item.address}</td>
-                <td>{item.email}</td>
-                <td>{item.message}</td>
-              </tr>
-            ))}
-          </tbody>
-        </Table>
-      </div>
-      <ReactPaginate
-        previousLabel={"Previous"}
-        nextLabel={"Next"}
-        breakLabel={"..."}
-        pageCount={pageCount}
-        marginPagesDisplayed={2}
-        pageRangeDisplayed={3}
-        onPageChange={handlePageChange}
-        containerClassName={"pagination justify-content-center"}
-        pageClassName={"page-item"}
-        pageLinkClassName={"page-link"}
-        previousClassName={"page-item"}
-        previousLinkClassName={"page-link"}
-        nextClassName={"page-item"}
-        nextLinkClassName={"page-link"}
-        breakClassName={"page-item"}
-        breakLinkClassName={"page-link"}
-        activeClassName={"active"}
-      />
     </section>
-  );
-};
+  )
+}
 
-export default Pagination
+export default Checkbox

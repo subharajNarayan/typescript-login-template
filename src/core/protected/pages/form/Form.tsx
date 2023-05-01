@@ -4,6 +4,7 @@ import * as Yup from 'yup';
 import { useFormik } from 'formik';
 import FormikValidationError from '../../../../components/React/FormikValidationError/FormikValidationError';
 import toast from '../../../../components/Notifier/Notifier';
+import axios from 'axios';
 
 const validationSchema = Yup.object().shape({
   firstname: Yup.string().nullable().required('This field is required'),
@@ -48,6 +49,7 @@ const Form = (props:Props) => {
     email: '',
     message: '',
   })
+  
 
   const {
     values,
@@ -59,11 +61,19 @@ const Form = (props:Props) => {
   } = useFormik({
     initialValues: initialState,
     validationSchema: validationSchema,
-    onSubmit: (values, { resetForm }) => {
-      console.log(values);
+    onSubmit: async(values, { resetForm }) => {
+      // console.log(values);
       // setIsLoader(true);
-      toast.success("Hooray... Data posted Successful")
-      resetForm();
+      try {
+        await axios.post('http://localhost:5000/api/register', values)
+        .then((response) => {
+          setInitialState(response.data)
+          toast.success("Hooray... Data posted Successful")
+          resetForm();
+        })
+      } catch (error) {
+        console.log(error);
+      }
     }
   })
 
