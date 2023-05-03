@@ -45,8 +45,8 @@ function Login(props: Props): ReactElement {
         props.addUserDetails(loginres.data);
         history("home");
       } else {
-        const errorMessage = loginres?.message?.detail
-        toast.error(errorMessage);
+        // const errorMessage = loginres?.data?.detail
+        toast.error("Server is taking too long to respond, please try again in sometime!");
         // Configure(errorMessage, loginres?.status)
       }
     },
@@ -109,6 +109,8 @@ const LoginForm = ({ authorizing, handleLogin }: LoginFormProps) => {
   const history = useNavigate();
   const handleGoogleLogin = useGoogleLogin({
     onSuccess: (response) => {
+      // console.log(response?.);
+      
       if (response?.access_token) {
         console.log(response, "test");
         TokenService.setToken({ "access": response.access_token })
@@ -125,11 +127,15 @@ const LoginForm = ({ authorizing, handleLogin }: LoginFormProps) => {
   // const loginGoogle = useGoogleLogin({
   //   onSuccess: tokenResponse => console.log(tokenResponse, "token from google login"),
   // });
+  const [isfacebook, setisFacebook] = React.useState()
 
   const responseFacebook = (response: any) => {
     if (response?.accessToken) {
       console.log(response, "Facebook Test");
       TokenService.setToken({ "access": response.accessToken })
+      setisFacebook(response?.name)
+      console.log(response?.name, "success");
+      
       const successMessage = "Logged In Successful"
       toast.success(successMessage)
       history("/home");
@@ -145,7 +151,7 @@ const LoginForm = ({ authorizing, handleLogin }: LoginFormProps) => {
     <div className="auth-body">
       <form className="" onSubmit={handleSubmit} autoComplete="off">
         {/* <h5 className="mb-2 font-bold">Water</h5> */}
-        <p className="">ABC System Login Portal</p>
+        <p className="">Template System Login Portal</p>
 
         <h6 className="mb-2 font-bold">CONFIGURATIONS</h6>
 
@@ -209,7 +215,7 @@ const LoginForm = ({ authorizing, handleLogin }: LoginFormProps) => {
           <Link to="/signup">Sign Up</Link>
         </p>
       </div>
-      <div className="auth-social mt-4">
+      {/* <div className="auth-social mt-4">
         <div className="auth-google mr-2">
           <Button
             className="btn btn-outlined-primary"
@@ -220,19 +226,11 @@ const LoginForm = ({ authorizing, handleLogin }: LoginFormProps) => {
           </Button>
         </div>
         <div className="auth-facebook ml-2">
-          {/* <Button
-              className="btn btn-outlined-primary"
-              onClick={() => handleFacebookLogin()}
-            >
-              <img src={facebook} alt="facebook"/>
-              <p>Sign in with Facebook</p>
-            </Button> */}
           <FacebookLogin
             appId="799159984481585"
             autoLoad={true}
             callback={responseFacebook}
             render={renderProps => (
-              // <button onClick={renderProps.onClick}>Sign in with Facebook</button>
               <Button
               className="btn btn-outlined-primary"
               onClick={renderProps.onClick}
@@ -243,7 +241,7 @@ const LoginForm = ({ authorizing, handleLogin }: LoginFormProps) => {
             )}
           />
         </div>
-      </div>
+      </div> */}
 
     </div>
   );

@@ -6,7 +6,12 @@
     border-radius: 4px;
     font-size: 18px;
     color: #FFF;
-    background-color: #0371D0;
+    background-color: #0371D0!important;
+    &:hover{
+        background-color: #0371D0!important;
+        border: #0371D0 1px solid !important;
+        // transform: scale(1.01);
+    }
     .loading {
         transform: scale(0.8);
         & div:first-child {
