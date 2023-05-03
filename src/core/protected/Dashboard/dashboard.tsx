@@ -26,8 +26,8 @@ function Dashboard(props: Props): ReactElement {
   const navigate = useNavigate;
   const { isAuthenticated } = useAuthentication();
 
-  console.log({props});
-  console.log({children});
+  // console.log({props});
+  // console.log({children});
   
 
   return (
@@ -43,13 +43,8 @@ function Dashboard(props: Props): ReactElement {
 
           <PrivateRoute
           appRoutes={appRoutes.filter((route) => route.type !== "login")}
-          redirectPath={[{ from: "*", to: "/auth/home" }]}
+          redirectPath={[{ from: "*", to: isAuthenticated() ? "/auth/home" : "home" }]}
         />
-            {/* <Form /> */}
-            {/* <List /> */}
-            {/* <Pagination /> */}
-            {/* <PrivateRoute appRoutes={children ?[...children] : []}  
-              redirectPath={[{ to: isAuthenticated() ? "/auth/home" : "/login", from: "*" }]} /> */}
           </div>
           <AppFooter />
         </main>

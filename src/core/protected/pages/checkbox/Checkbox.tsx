@@ -1,64 +1,91 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Table } from 'reactstrap'
 import { DeleteIcon } from '../../../../assets/images/xd';
-
-interface Data {
-  id: number;
-  firstname: string;
-  middlename: string;
-  lastname: string;
-  address: string;
-  email: string;
-  message: string;
-}
+import axios from 'axios';
+import { Alert } from 'reactstrap';
+import { toast } from 'react-toastify';
 
 const Checkbox = () => {
 
-  const data: Data[] = [
-    { id: 1, firstname: 'John', middlename: 'prasad', lastname: 'Wick', address: 'America', email: 'john@example.com', message: 'Lorem ipsum dolor sit amet consectetur,' },
-    { id: 2, firstname: 'Jane', middlename: 'dev', lastname: 'Lane', address: 'Nepal', email: 'jane@example.com', message: 'Lorem ipsum dolor sit amet consectetur,' },
-    { id: 3, firstname: 'Bob', middlename: 'kumar', lastname: 'Marley', address: 'Africa', email: 'bob@example.com', message: 'Lorem ipsum dolor sit amet consectetur,' },
-    { id: 4, firstname: 'Mary', middlename: 'raj', lastname: 'Lee', address: 'Australia', email: 'mary@example.com', message: 'Lorem ipsum dolor sit amet consectetur,' },
-    { id: 5, firstname: 'Peter', middlename: 'narayan', lastname: 'Hans', address: 'India', email: 'peter@example.com', message: 'Lorem ipsum dolor sit amet consectetur,' },
-    { id: 6, firstname: 'Kate', middlename: 'lal', lastname: 'Pery', address: 'Switzerland', email: 'kate@example.com', message: 'Lorem ipsum dolor sit amet consectetur,' },
-    { id: 7, firstname: 'Tom', middlename: 'prasad', lastname: 'Holland', address: 'Iran', email: 'tom@example.com', message: 'Lorem ipsum dolor sit amet consectetur,' },
-    { id: 8, firstname: 'Emma', middlename: 'dev', lastname: 'Watson', address: 'USA', email: 'emma@example.com', message: 'Lorem ipsum dolor sit amet consectetur,' },
-    { id: 9, firstname: 'Adam', middlename: 'kumar', lastname: 'Smith', address: 'Japan', email: 'adam@example.com', message: 'Lorem ipsum dolor sit amet consectetur,' },
-    { id: 10, firstname: 'Lucy', middlename: 'raj', lastname: 'Pucy', address: 'China', email: 'lucy@example.com', message: 'Lorem ipsum dolor sit amet consectetur,' },
-    { id: 11, firstname: 'Ben', middlename: 'narayan', lastname: 'Ten', address: 'Korea', email: 'ben@example.com', message: 'Lorem ipsum dolor sit amet consectetur,' },
-    { id: 12, firstname: 'Alex', middlename: 'lal', lastname: 'Zender', address: 'Russia', email: 'alex@example.com', message: 'Lorem ipsum dolor sit amet consectetur,' },
-    { id: 13, firstname: 'Lisa', middlename: 'prasad', lastname: 'Ola', address: 'Kuwait', email: 'lisa@example.com', message: 'Lorem ipsum dolor sit amet consectetur,' },
-    { id: 14, firstname: 'Tim', middlename: 'dev', lastname: 'Land', address: 'Qatar', email: 'tim@example.com', message: 'Lorem ipsum dolor sit amet consectetur,' },
-    { id: 15, firstname: 'Sara', middlename: 'ali', lastname: 'Khan', address: 'Saudi Arab', email: 'sara@example.com', message: 'Lorem ipsum dolor sit amet consectetur,' },
-    { id: 16, firstname: 'Mike', middlename: 'raj', lastname: 'Tyson', address: 'Dubai', email: 'mike@example.com', message: 'Lorem ipsum dolor sit amet consectetur,' },
-    { id: 17, firstname: 'Olivia', middlename: 'narayan', lastname: 'Dom', address: 'Malaysia', email: 'olivia@example.com', message: 'Lorem ipsum dolor sit amet consectetur,' },
-    { id: 18, firstname: 'Tony', middlename: 'lal', lastname: 'Villa', address: 'Germany', email: 'david@example.com', message: 'Lorem ipsum dolor sit amet consectetur,' },
-    { id: 19, firstname: 'Julia', middlename: 'prasad', lastname: 'Rat', address: 'Peru', email: 'julia@example.com', message: 'Lorem ipsum dolor sit amet consectetur,' },
-    { id: 20, firstname: 'Harry', middlename: 'dev', lastname: 'Potter', address: 'Azgard', email: 'harry@example.com', message: 'Lorem ipsum dolor sit amet consectetur,' },
-  ];
+  const [initialState, setInitialState] = React.useState<any[]>([]);
+  const [ selectedRows, setSelectedRows ] = useState<number[]>([]);
 
-  const [dataTable, setDataTable] = React.useState<Data[]>(data);
+  React.useEffect(() => {
+    axios.get('http://localhost:5000/api/register')
+      .then((response) => {
+        setInitialState(response.data)
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }, [])
 
-
-  const DeleteData = (id: number) => {
-    const filterData = dataTable.filter((item) => item.id !== id);
-    console.log({ filterData });
-    setDataTable(filterData)
+  function selectAllRows(e: React.ChangeEvent<HTMLInputElement>) {
+    if (e.target.checked) {
+      const allRows = initialState.map((rowData, index) => index);
+      setSelectedRows(allRows);
+    } else {
+      setSelectedRows([]);
+    }
   }
 
+  function selectRow(event: React.ChangeEvent<HTMLInputElement>) {
+    const rowIndex = Number(event.target.value);
+    if (event.target.checked) {
+      setSelectedRows([...selectedRows, rowIndex]);
+    } else {
+      setSelectedRows(selectedRows.filter((index) => index !== rowIndex));
+    }
+  }
+
+  async function deleteRows(_id: number) {
+    const newTableData = initialState.filter((rowData) => !selectedRows.includes(rowData.id));
+    try {
+      for (const _id of selectedRows) {
+        await axios.delete(`http://localhost:5000/api/register/${_id}`);
+      }
+      setInitialState(newTableData);
+      setSelectedRows([]);
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   return (
     <section className='p-4'>
-      <div className='checkbox'>
-        <div className="checkbox-heading">
+      <div className='checkboxs'>
+        <div className="checkboxs-heading">
           <h4>Checkbox</h4>
         </div>
         <div className='list data-table'>
           <div className="table-responsive">
+            {/* {selectedRows.length ?
+              <div id="dlt-status">
+                <Alert className="d-flex justify-content-between align-items-center"
+                  style={{ border: "1px solid rgba(158, 160, 160, 0.5)", minHeight: "60px" }}>
+
+                  <p style={{ fontSize: "14px", fontWeight: "400", color: "#000" }}>
+                    <strong> {selectedRows.length} </strong>Item Selected</p>
+                  <h5 className="des" style={{ color: "#000" }}>Are you sure you want to delete ?</h5>
+
+                  <div role="button" id="dlt-btn">
+                    <img src={DeleteIcon} alt="DLT" className="ml-2" style={{ color: "darkred" }}
+                      onClick={() => deleteRows(initialState.map((item) => item._id))} />
+                  </div>
+                </Alert>
+              </div>
+              : null
+            } */}
             <Table>
               <thead>
                 <tr>
-                  <th>S.N</th>
+                  <th>
+                    <input
+                      type="checkbox"
+                      name="selectAll"
+                      id="selectAll" 
+                      onChange={selectAllRows}/>
+                  </th>
                   <th>First Name</th>
                   <th>Middle Name</th>
                   <th>Last Name</th>
@@ -69,9 +96,16 @@ const Checkbox = () => {
                 </tr>
               </thead>
               <tbody>
-                {data?.map((item, index) => (
+                {initialState?.map((item, index) => (
                   <tr key={index}>
-                    <td>{item.id}</td>
+                    <td>
+                      <input
+                        value={index}
+                        type="checkbox"
+                        id="checked-data" 
+                        checked={selectedRows.includes(index)}
+                        onChange={selectRow}/>
+                    </td>
                     <td>{item.firstname}</td>
                     <td>{item.middlename}</td>
                     <td>{item.lastname}</td>
@@ -79,7 +113,7 @@ const Checkbox = () => {
                     <td>{item.email}</td>
                     <td>{item.message}</td>
                     <td className="action">
-                      <div role='button' onClick={() => DeleteData(item.id)}>
+                      <div role='button' onClick={() => deleteRows(item._id)}>
                         <img src={DeleteIcon} alt="" />
                       </div>
                     </td>

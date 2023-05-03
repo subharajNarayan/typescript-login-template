@@ -26,7 +26,8 @@ import AboutIcon from './About.svg'
 import Pagination from './Pagination.svg'
 import Previous from './Previous.svg'
 import Next from './Next.svg'
-import Checkbox from './Checkbox.svg';
+import Checkbox from './Checkbox.svg'
+import Carousel from './Carousel.svg'
 
 export {
     HomeIcon,
@@ -57,5 +58,6 @@ export {
     Pagination,
     Previous,
     Next,
-    Checkbox
+    Checkbox,
+    Carousel
 }

@@ -37,7 +37,7 @@ const validationSchema = Yup.object().shape({
 interface Props{}
 
 
-const Form = (props:Props) => {
+const ModalForm = (props:Props) => {
 
   const [ isLoader, setIsLoader ] = React.useState(false);
 
@@ -80,9 +80,9 @@ const Form = (props:Props) => {
   return (
     <section className="form p-4">
       <div className='form-start'>
-        <div className='form-heading'>
+        {/* <div className='form-heading'>
           <h4>REGISTER HERE</h4>
-        </div>
+        </div> */}
         <div className='form-body'>
           <form action="form" onSubmit={(e) => {
             e.preventDefault();
@@ -177,4 +177,4 @@ const Form = (props:Props) => {
   )
 }
 
-export default Form;
+export default ModalForm;

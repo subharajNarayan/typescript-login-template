@@ -3,16 +3,15 @@ import React from 'react';
 import { Table } from 'reactstrap';
 import { DeleteIcon } from '../../../../assets/images/xd';
 import { toast } from 'react-toastify';
+import './list.scss'
 
 const List = () => {
 
   const [Data, isSetData] = React.useState<any[]>([]);
-  console.log({ Data });
 
   React.useEffect(() => {
     axios.get('http://localhost:5000/api/register')
       .then((response) => {
-        // console.log(response.data, "Success");
         isSetData(response.data)
       })
       .catch(error => {
@@ -20,17 +19,20 @@ const List = () => {
       });
   }, [])
 
-  // const handleDelete = async(_id: any) => {
-  //   try {
-  //     await axios.post(`http://localhost:5000/api/register/:${id}`)
-  //     .then((response) => {
-  //       isSetData(response.data)
-  //       toast.success("Hooray... Data posted Successful")
-  //     })
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }
+
+  const handleDelete = async (_id: number) => {
+    try {
+      await axios.delete(`http://localhost:5000/api/register/${_id}`);
+      toast.success('Data Deleted Successful')
+      const response = await axios.get('http://localhost:5000/api/register');
+      const deleteData = response.data;
+      isSetData(deleteData)
+      console.log({deleteData});
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
 
   return (
     <section className="list data-table mt-4">
@@ -38,9 +40,6 @@ const List = () => {
         <Table className='table'>
           <thead>
             <tr>
-              <th>
-                <input type="checkbox" />
-              </th>
               {/* <th>S.N</th> */}
               <th>First Name</th>
               <th>Middle Name</th>
@@ -54,9 +53,6 @@ const List = () => {
           <tbody>
             {Data.map((item, index) => (
               <tr key={index}>
-                <td>
-                  <input type="checkbox" />
-                </td>
                 {/* <td>{item._id}</td> */}
                 <td>{item.firstname}</td>
                 <td>{item.middlename}</td>
@@ -64,7 +60,7 @@ const List = () => {
                 <td>{item.address}</td>
                 <td>{item.email}</td>
                 <td>{item.message}</td>
-                <td className=''>
+                <td className='action-btn' onClick={() => handleDelete(item._id)}>
                   <img src={DeleteIcon} alt="" className='mr-0'/>
                 </td>
               </tr>
@@ -77,11 +73,3 @@ const List = () => {
 }
 
 export default List;
-
-function isSetData(data: any) {
-  throw new Error('Function not implemented.');
-}
-function async(arg0: number) {
-  throw new Error('Function not implemented.');
-}
-

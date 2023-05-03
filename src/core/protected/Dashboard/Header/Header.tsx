@@ -38,10 +38,10 @@ const AppHeader = (props: Props) => {
   const LogOutAction = () => {
     dispatch(logoutAction())
     toast.success('LogOut Successful !!!')
-    window.location.reload();
+    // window.location.reload();
   }
 
-  // const userDetail = useSelector((state: RootState) => state?.userDetails)
+  const userDetail = useSelector((state: RootState) => state?.userDetails)
   // console.log({ ccc: userDetail });
 
   const togglesidebar = () => setsidebarToggle(!sidebarToggle);
@@ -65,7 +65,7 @@ const AppHeader = (props: Props) => {
             <Dropdown isOpen={dropdownOpen} toggle={toggle} tag="div">
               <DropdownToggle className="auth" tag="div" role="button">
                 <div className="textbox mr-2">
-                  <h6 className="username font-bold">Subharaj</h6>
+                  <h6 className="username font-bold">{userDetail?.firstname}</h6>
                 </div>
                 <i className="ic-dropdown"></i>
               </DropdownToggle>
@@ -81,88 +81,6 @@ const AppHeader = (props: Props) => {
         </div>
       </header>
 
-      {/* <CHeader position="sticky" className="mb-4">
-        <CContainer fluid>
-          <CHeaderToggler
-            className="ps-1"
-            onClick={togglesidebar}
-          >
-            <CIcon icon={cilMenu} size="lg" />
-          </CHeaderToggler>
-          <CHeaderBrand className="mx-auto d-md-none" >
-            <CIcon icon={logo} height={48} />
-            <p>test</p>
-          </CHeaderBrand>
-          <CHeaderNav className="d-none d-md-flex me-auto">
-            <CNavItem>
-              <CNavLink to="/dashboard" component={NavLink}>
-                Dashboard
-              </CNavLink>
-            </CNavItem>
-            <CNavItem>
-              <CNavLink href="#">Users</CNavLink>
-            </CNavItem>
-            <CNavItem>
-              <CNavLink href="#">Settings</CNavLink>
-            </CNavItem>
-          </CHeaderNav>
-
-          <CHeaderNav className="d-none d-md-flex me-auto">
-            <CNavItem>
-              <CNavLink component={NavLink}>
-
-                <div className="columns is-centered">
-                  <div className="column is-half search-bar" style={{ width: 400 }}>
-                    <ReactSearchAutocomplete
-                      items={items}
-                      onSearch={handleOnSearch}
-                      onHover={handleOnHover}
-                      onSelect={handleOnSelect}
-                      onFocus={handleOnFocus}
-                      styling={
-                        {
-                          clearIconMargin: '0px 0px 0 180px',
-                          searchIconMargin: '0 0 0 -240px'
-                        }
-                      }
-                      autoFocus
-                      formatResult={formatResult}
-                    />
-                  </div>
-                </div>
-
-
-              </CNavLink>
-            </CNavItem>
-          </CHeaderNav>
-
-
-          <CHeaderNav>
-            <CNavItem>
-              <CNavLink href="#">
-                <CIcon icon={cilBell} size="lg" />
-              </CNavLink>
-            </CNavItem>
-            <CNavItem>
-              <CNavLink href="#">
-                <CIcon icon={cilList} size="lg" />
-              </CNavLink>
-            </CNavItem>
-            <CNavItem>
-              <CNavLink href="#">
-                <CIcon icon={cilEnvelopeOpen} size="lg" />
-              </CNavLink>
-            </CNavItem>
-          </CHeaderNav>
-          <CHeaderNav className="ms-3">
-            <AppHeaderDropdown />
-          </CHeaderNav>
-        </CContainer>
-        <CHeaderDivider />
-        <CContainer fluid>
-          <AppBreadcrumb />
-        </CContainer>
-      </CHeader> */}
     </>
   )
 }

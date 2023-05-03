@@ -7,9 +7,11 @@ const Home = lazy(() => import("../core/public/Home/Home"))
 const ProtectedHome = lazy(() => import("../core/protected/Home/index"))
 const About = lazy(() => import("../core/public/About/About"))
 const Form = lazy(() => import("../core/protected/pages/form/Form"))
-const List = lazy(() => import("../core/protected/pages/list/List"))
+// const List = lazy(() => import("../core/protected/pages/list/List"))
+const ModalFormList = lazy(() => import("../core/protected/pages/list/index"))
 const Pagination = lazy(() => import("../core/protected/pages/pagination/Pagination"))
 const Checkbox = lazy(() => import("../core/protected/pages/checkbox/Checkbox"))
+const Carousel = lazy(() => import('../core/protected/pages/carousel/Carousel'))
 
 const appRoutes: CustomRoute[] = [
     {
@@ -61,7 +63,7 @@ const appRoutes: CustomRoute[] = [
     },
     {
         path: "/auth/list",
-        component: List,
+        component: ModalFormList,
         type: "authorized",
     },
     {
@@ -72,6 +74,11 @@ const appRoutes: CustomRoute[] = [
     {
         path: "/auth/checkbox",
         component: Checkbox,
+        type: "authorized",
+    },
+    {
+        path: "/auth/carousel",
+        component: Carousel,
         type: "authorized",
     },
     {

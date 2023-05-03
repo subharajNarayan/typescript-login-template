@@ -1,26 +1,36 @@
 import { Dispatch } from "redux";
 
+// const initialState = {
+//     id: null,
+//     name: "",
+//     slug: "",
+//     tokens: {
+//         access: "",
+//         refresh: "",
+//     },
+//     username: "",
+// }
+
 const initialState = {
     id: null,
-    name: "",
-    slug: "",
-    tokens: {
-        access: "",
-        refresh: "",
-    },
-    username: "",
-    // water_scheme: "",
+    firstname: "",
+    // slug: "",
+    // tokens: {
+    //     access: "",
+    //     refresh: "",
+    // },
+    // username: "",
 }
 
 type IUserDetails = {
     id: number | null
-    name: string
-    slug: string
-    tokens: {
-        access: string
-        refresh: string
-    },
-    username: string
+    firstname: string
+    // slug: string
+    // tokens: {
+    //     access: string
+    //     refresh: string
+    // },
+    // username: string
     // water_scheme: string
 }
 

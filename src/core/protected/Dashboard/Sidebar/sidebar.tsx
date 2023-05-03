@@ -1,5 +1,5 @@
 import React from 'react';
-import { HomeIcon, Dashboard, Form, List, AboutIcon, Pagination, Checkbox } from '../../../../assets/images/xd';
+import { HomeIcon, Dashboard, Form, List, AboutIcon, Pagination, Checkbox, Carousel } from '../../../../assets/images/xd';
 import { Link, NavLink } from 'react-router-dom';
 import { UncontrolledCollapse } from 'reactstrap';
 // import { NavLink } from 'reactstrap';
@@ -63,6 +63,12 @@ const AppSidebar = (props: Props) => {
           title: 'Checkbox',
           link: "/auth/checkbox",
           icon: Checkbox,
+        },
+        {
+          name: "Carousel",
+          title: 'Carousel',
+          link: "/auth/carousel",
+          icon: Carousel,
         },
       ]
     },

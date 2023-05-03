@@ -36,12 +36,14 @@ function Login(props: Props): ReactElement {
   const handleLogin = useCallback(
     async (userDetails: UserCredentials) => {
       const loginres: any = await loginUser(userDetails);
+      console.log({loginres});
+      
       if (loginres?.data?.access) {
         const successMessage = "Logged In Successful"
         // Configure(successMessage, loginres?.status)
         toast.success(successMessage)
         props.addUserDetails(loginres.data);
-        history("/home");
+        history("home");
       } else {
         const errorMessage = loginres?.message?.detail
         toast.error(errorMessage);
@@ -93,8 +95,6 @@ const LoginForm = ({ authorizing, handleLogin }: LoginFormProps) => {
   const loginValidationSchema = YupObject().shape({
     email: YupString().required("This Field id Required"),
     password: YupString().required("This Field id Required"),
-    // email: YupString().required("login:input.email.error-required"),
-    // password: YupString().required("login:input.password.error-required"),
   });
 
   const { values, handleChange, handleSubmit, errors, touched } = useFormik({
@@ -198,8 +198,8 @@ const LoginForm = ({ authorizing, handleLogin }: LoginFormProps) => {
               className="btn btn-outlined-primary"
               // text={t("login:title")}
               text={"Login"}
-              disabled={authorizing}
               loading={authorizing}
+              disabled={authorizing}
             />
           </div>
         </div>

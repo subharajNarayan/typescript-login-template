@@ -22,7 +22,7 @@ import ErrorBoundary from "../../components/React/ErrorBoundary/ErrorBoundary";
 const PrivateRoute = (props: PrivateRouteProps & { redirectPath?: RouteRedirectProps, animate?: boolean }) => {
     const location = useLocation();
     const { appRoutes, redirectPath } = props;
-    console.log({ appRoutes });
+    // console.log({ appRoutes });
 
     return (
         <>
