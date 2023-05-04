@@ -2,7 +2,7 @@ import { AnyAction, combineReducers } from "redux";
 import loginReducer from "./modules/login/login";
 import TokenService from "../services/jwt-token/jwt-token";
 import i18nextReducer from "./modules/i18n/i18n";
-import userDetails from "./modules/userDetails/index"
+import userDetails from "./modules/userDetails"
 import outhReducer from "./modules/oauthservices";
 import registerReducer from "./modules/register/register";
 // import {addUserDetailsGoogle} from  "./modules/userDetails/index"

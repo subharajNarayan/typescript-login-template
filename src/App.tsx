@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import appRoutes from "./routes/routes";
 import PrivateRoute from "./routes/PrivateRoute/PrivateRoute";
 import useAuthentication from "./services/authentication/AuthService";

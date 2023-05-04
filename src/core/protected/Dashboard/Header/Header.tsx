@@ -4,27 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootState, logoutAction } from '../../../../store/root-reducer';
 import { Dropdown, DropdownMenu, DropdownToggle, DropdownItem } from 'reactstrap';
 import { toast } from 'react-toastify';
-// import { NavLink } from 'react-router-dom'
-// import { useSelector, useDispatch } from 'react-redux'
-// import { ReactSearchAutocomplete } from 'react-search-autocomplete';
-// import { items, handleOnFocus, handleOnHover, handleOnSearch, handleOnSelect, formatResult } from '../Header/auto-searchbar/searchbar';
-
-// import {
-//   CContainer,
-//   CHeader,
-//   CHeaderBrand,
-//   CHeaderDivider,
-//   CHeaderNav,
-//   CHeaderToggler,
-//   CNavLink,
-//   CNavItem,
-// } from '@coreui/react';
-// import CIcon from '@coreui/icons-react'
-// import { cilBell, cilEnvelopeOpen, cilList, cilMenu } from '@coreui/icons'
-
-// import AppBreadcrumb from './dropdown/index'
-// import AppHeaderDropdown from './dropdown/headerDropdown'
-// import logo from '../../../../assets/images/fav.png';
+import TokenService from '../../../../services/jwt-token/jwt-token';
 
 interface Props {
   sidebarToggle: boolean;
@@ -41,8 +21,12 @@ const AppHeader = (props: Props) => {
     // window.location.reload();
   }
 
-  const userDetail = useSelector((state: RootState) => state?.userDetails)
+  // const userDetail = useSelector((state: RootState) => state?.userDetails)
   // console.log({ ccc: userDetail });
+
+
+  const userDetails = TokenService.getAccessToken();
+  
 
   const togglesidebar = () => setsidebarToggle(!sidebarToggle);
   // console.log(sidebarToggle, "True");
@@ -65,7 +49,7 @@ const AppHeader = (props: Props) => {
             <Dropdown isOpen={dropdownOpen} toggle={toggle} tag="div">
               <DropdownToggle className="auth" tag="div" role="button">
                 <div className="textbox mr-2">
-                  <h6 className="username font-bold">{userDetail?.firstname}</h6>
+                  <h6 className="username font-bold">{userDetails.firstname}</h6>
                 </div>
                 <i className="ic-dropdown"></i>
               </DropdownToggle>
